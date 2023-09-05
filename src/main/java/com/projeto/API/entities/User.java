@@ -1,5 +1,6 @@
 package com.projeto.API.entities;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import com.projeto.API.entities.enums.UserStatus;
@@ -21,23 +22,28 @@ public class User {
 	
 	@Column(unique = true)
 	private String cpf;
+	@Column(unique = true)
 	private String email;
+	
 	private String name;
 	private String senha;
+	private BigDecimal money;
 	
 	private UserStatus status;
 	
 	public User(){
 	}
-
-	public User(String name, String cpf, String email, String senha, UserStatus status) {
-		this.name = name;
+	
+	public User(Long id, String cpf, String email, String name, String senha, BigDecimal money, UserStatus status) {
+		this.id = id;
 		this.cpf = cpf;
 		this.email = email;
+		this.name = name;
 		this.senha = senha;
+		this.setMoney(money);
 		this.status = status;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -85,6 +91,14 @@ public class User {
 	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
+	
+	public BigDecimal getMoney() {
+		return money;
+	}
+	
+	public void setMoney(BigDecimal money) {
+		this.money = money;
+	}
 
 	@Override
 	public int hashCode() {
@@ -102,5 +116,4 @@ public class User {
 		User other = (User) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(email, other.email);
 	}
-
 }

@@ -1,2 +1,3 @@
-INSERT INTO tb_User_Comun (cpf, name, email, senha, status) VALUES ('11111111111', 'Luan Victor', 'Luan@gmail.com', '123456', 0);
-INSERT INTO tb_User_Comun (cpf, name, email, senha, status) VALUES ('22222222222', 'teste', 'teste@gmail.com', '123456', 1);
+INSERT INTO tb_User_Comun (cpf, name, email, senha, money, status) VALUES ('11111111111', 'Luan Victor', 'luan@gmail.com', '123456', 5000, 0);
+INSERT INTO tb_User_Comun (cpf, name, email, senha, money, status) VALUES ('22222222222', 'Jose Santos', 'jose@gmail.com', '123456', 10000, 1);
+INSERT INTO tb_User_Comun (cpf, name, email, senha, money, status) VALUES ('33333333333', 'Carlos Alberto', 'carlos@gmail.com', '123456', 0, 1);
