@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.projeto.API.DTO.UserDTO;
 import com.projeto.API.entities.User;
+import com.projeto.API.entities.enums.UserStatus;
 import com.projeto.API.repositories.UserRepository;
+import com.projeto.API.services.exceptions.ContaNotFoundException;
+import com.projeto.API.services.exceptions.LojistaException;
+import com.projeto.API.services.exceptions.SaldoInsuficienteException;
 
 @Service
 public class UserService {
@@ -25,6 +29,19 @@ public class UserService {
 		
 		User userOrigem = repository.findByCpf(cpfContaOrigem);
 		User userDestino = repository.findByCpf(cpfContaDestino);
+		
+		
+		 if (userOrigem == null || userDestino == null) {
+	            throw new ContaNotFoundException("Conta não encontrada.");
+	        }
+
+	        if (userOrigem.getMoney().compareTo(valor) < 0) {
+	            throw new SaldoInsuficienteException("Saldo insuficiente na conta de origem.");
+	        }
+	        
+	        if(userOrigem.getStatus() == UserStatus.LOJISTA) {
+	        	throw new LojistaException("Lojista não pode realizar transferência");
+	        }
 		
 		userOrigem.setMoney(userOrigem.getMoney().subtract(valor));
 		userDestino.setMoney(userDestino.getMoney().add(valor));
